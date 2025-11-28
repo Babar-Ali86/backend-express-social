@@ -67,3 +67,43 @@ export const addUser = async (req, res) => {
   }
 };
 
+// =====================================
+// 🟧 PUT - UPDATE USER
+// =====================================
+
+export const updateUser = async (req, res) => {
+  const id = req.params.id;
+  const {
+    FirstName,
+    LastName,
+    City,
+    Country,
+    Email,
+    PhoneNo,
+    Password,
+    UserName,
+  } = req.body;
+
+  const update_at = new Date();
+
+  try {
+    await db.query(
+      'UPDATE users SET FirstName = ?, LastName =?, City=?, Country=?, Email=?,PhoneNo=?, Password=?, UserName=?,updated_at = ? where id = ?',
+      [
+        FirstName,
+        LastName,
+        City,
+        Country,
+        Email,
+        PhoneNo,
+        Password,
+        UserName,
+        update_at,
+        id,
+      ]
+    );
+    res.json({ message: 'user Updated' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
