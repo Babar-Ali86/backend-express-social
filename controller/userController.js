@@ -6,7 +6,7 @@ import db from '../config/db.js';
 
 export const getUsers = async (req, res) => {
   try {
-    const [rows] = await db.query('SELECT * FROM users LIMIT 100');
+    const [rows] = await db.query('SELECT * FROM users ');
     res.json(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -115,7 +115,7 @@ export const updateUser = async (req, res) => {
 export const delUser = async (req, res) => {
   // const { id } = req.params;
   try {
-  await db.query('DELETE *  FROM users where id = ? ;', [req.params.id]);
+  await db.query('DELETE FROM users where id = ? ;', [req.params.id]);
     // res.send(<p>Your given id data is deleted</p>);
   } catch (err) {
     res.status(500).json({ error: err.message });
