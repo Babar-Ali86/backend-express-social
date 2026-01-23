@@ -18,9 +18,11 @@ export const getUsers = async (req, res) => {
 // =====================================
 
 export const getUser = async (req, res) => {
-  const { id } = req.params;
+  // const { id } = req.params;
   try {
-    const [rows] = await db.query('SELECT * FROM users where id = ? ;', [id]);
+    const [rows] = await db.query('SELECT * FROM users where id = ? ;', [
+      req.params.id,
+    ]);
     res.json(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -56,7 +58,7 @@ export const addUser = async (req, res) => {
         Password,
         UserName,
         created_At,
-      ]
+      ],
     );
     res.json({
       message: 'User Added Succesfully',
@@ -72,7 +74,7 @@ export const addUser = async (req, res) => {
 // =====================================
 
 export const updateUser = async (req, res) => {
-  const id = req.params.id;
+  // const id = req.params.id;
   const {
     FirstName,
     LastName,
@@ -99,10 +101,27 @@ export const updateUser = async (req, res) => {
         Password,
         UserName,
         update_at,
-        id,
-      ]
+        req.params.id,
+      ],
     );
     res.json({ message: 'user Updated' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+
+// =====================================
+// 🟦 GET User by param
+// =====================================
+
+export const DelUser = async (req, res) => {
+  // const { id } = req.params;
+  try {
+     await db.query('Delete FROM users where id = ? ;', [
+      req.params.id,
+    ]);
+    // res.json(`UserDeleted Succssfuly ${req.params.id}`);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

@@ -1,15 +1,17 @@
 import express from 'express';
-// import cors from 'cors';
+import cors from 'cors';
 import userRoute from './routes/api/userRouter.js';
+import env from 'dotenv'; 
+
+env.config();
 
 const app = express();
-const Port = 3000;
+const Port = process.env.PORT || 3000;
 // process.env.TZ = 'Asia/Karachi';
 
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing form-data (if you use forms)
-
-// app.use(cors());
+app.use(cors());
 
 app.use('/api', userRoute);
 
@@ -31,5 +33,5 @@ app.use('/api', userRoute);
 // });
 
 app.listen(Port, () => {
-  console.log(`Server Running on: http://localhost:${Port}`);
+  console.log(`Server Running on: http://localhost:${Port}/api/users`);
 });
