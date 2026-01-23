@@ -6,7 +6,7 @@ import db from '../config/db.js';
 
 export const getUsers = async (req, res) => {
   try {
-    const [rows] = await db.query('SELECT * FROM users LIMIT 50');
+    const [rows] = await db.query('SELECT * FROM users LIMIT 1000');
     res.json(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
