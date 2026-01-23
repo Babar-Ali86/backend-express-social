@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import userRoute from './routes/api/userRouter.js';
-import env from 'dotenv'; 
+import env from 'dotenv';
 
 env.config();
 

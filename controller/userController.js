@@ -110,17 +110,14 @@ export const updateUser = async (req, res) => {
   }
 };
 
-
 // =====================================
-// 🟦 GET User by param
+// 🟥 DELETE - Delete USER
 // =====================================
 
 export const DelUser = async (req, res) => {
   // const { id } = req.params;
   try {
-     await db.query('Delete FROM users where id = ? ;', [
-      req.params.id,
-    ]);
+    await db.query('Delete FROM users where id = ? ;', [req.params.id]);
     // res.json(`UserDeleted Succssfuly ${req.params.id}`);
   } catch (err) {
     res.status(500).json({ error: err.message });
