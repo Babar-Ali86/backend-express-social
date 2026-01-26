@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import userRoute from './routes/api/userRouter.js';
+import postRoute from './routes/api/postsRouter.js';
 import env from 'dotenv';
 
 env.config();
@@ -13,7 +14,7 @@ app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing form-data (if you use forms)
 app.use(cors());
 
-app.use('/api', userRoute);
+app.use('/api', userRoute, postRoute);
 
 // app.post('/api/user', (req, res) => {
 //   const { name, email } = req.body;

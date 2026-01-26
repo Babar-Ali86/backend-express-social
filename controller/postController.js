@@ -1,12 +1,12 @@
 import db from '../config/db.js';
 
 // =====================================
-// 🟦 GET ALL USERS
+// 🟦 GET ALL Posts
 // =====================================
 
-export const getUsers = async (req, res) => {
+export const getPosts = async (req, res) => {
   try {
-    const [rows] = await db.query('SELECT * FROM users');
+    const [rows] = await db.query('SELECT * FROM posts');
     res.json(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -17,10 +17,10 @@ export const getUsers = async (req, res) => {
 // 🟦 GET User by param
 // =====================================
 
-export const getUser = async (req, res) => {
+export const getPost = async (req, res) => {
   const id = req.params.id;
   try {
-    const [rows] = await db.query('SELECT * FROM users where id = ? ;', [id]);
+    const [rows] = await db.query('SELECT * FROM posts where id = ? ;', [id]);
     res.json(rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -31,31 +31,30 @@ export const getUser = async (req, res) => {
 // 🟩 POST - CREATE NEW USER
 // =====================================
 
-export const addUser = async (req, res) => {
+export const addPost = async (req, res) => {
   const created_At = new Date();
   const {
-    FirstName,
-    LastName,
-    City,
-    Country,
-    Email,
-    PhoneNo,
-    Password,
-    UserName,
+    userID,
+    created_at,
+    PostTitle,
+    PostDescrip,
+    Likes,
+    Comment,
+    Share,
+    HashTags,
   } = req.body;
   try {
     const [result] = await db.query(
-      'insert into users (FirstName, LastName,City,Country,Email,PhoneNo,Password,UserName,created_At) values (?,?,?,?,?,?,?,?,?)',
+      'insert into posts (FirstName, LastName,City,Country,Email,PhoneNo,Password,UserName) values (?,?,?,?,?,?,?,?,?)',
       [
-        FirstName,
-        LastName,
-        City,
-        Country,
-        Email,
-        PhoneNo,
-        Password,
-        UserName,
-        created_At,
+        userID,
+        created_at,
+        PostTitle,
+        PostDescrip,
+        Likes,
+        Comment,
+        Share,
+        HashTags,
       ],
     );
     res.json({
@@ -71,34 +70,31 @@ export const addUser = async (req, res) => {
 // 🟧 PUT - UPDATE USER
 // =====================================
 
-export const updateUser = async (req, res) => {
+export const updatePost = async (req, res) => {
   const id = req.params.id;
   const {
-    FirstName,
-    LastName,
-    City,
-    Country,
-    Email,
-    PhoneNo,
-    Password,
-    UserName,
+    userID,
+    created_at,
+    PostTitle,
+    PostDescrip,
+    Likes,
+    Comment,
+    Share,
+    HashTags,
   } = req.body;
-
-  const update_at = new Date();
 
   try {
     await db.query(
-      'UPDATE users SET FirstName = ?, LastName =?, City=?, Country=?, Email=?,PhoneNo=?, Password=?, UserName=?,updated_at = ? where id = ?',
+      'UPDATE posts SET userID = ?, created_at =?, PostTitle=?, PostDescrip=?, Likes=?,Comment=?, Share=?, HashTags=? where id = ?',
       [
-        FirstName,
-        LastName,
-        City,
-        Country,
-        Email,
-        PhoneNo,
-        Password,
-        UserName,
-        update_at,
+        userID,
+        created_at,
+        PostTitle,
+        PostDescrip,
+        Likes,
+        Comment,
+        Share,
+        HashTags,
         id,
       ],
     );
@@ -106,16 +102,17 @@ export const updateUser = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+  s;
 };
 
 // =====================================
 // 🟥 DELETE - Delete USER
 // =====================================
 
-export const DelUser = async (req, res) => {
+export const Delpost = async (req, res) => {
   const id = req.params.id;
   try {
-    await db.query('Delete FROM users where id = ? ;', [id]);
+    await db.query('Delete FROM posts where id = ? ;', [id]);
     // res.json(`UserDeleted Succssfuly ${req.params.id}`);
   } catch (err) {
     res.status(500).json({ error: err.message });
