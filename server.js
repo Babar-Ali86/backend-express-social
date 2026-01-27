@@ -7,18 +7,19 @@ import env from 'dotenv';
 
 env.config();
 
-dotenv.config();
 const app = express();
 const Port = process.env.PORT || 3000;
-// process.env.TZ = 'Asia/Karachi';
-
-
 
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing form-data (if you use forms)
 app.use(cors());
 
 app.use('/api', userRoute, postRoute);
+
+app.get('/time', (req, res) => {
+  let time = new Date();
+  res.send(`<h1>${time}</h1>`);
+});
 
 // app.post('/api/user', (req, res) => {
 //   const { name, email } = req.body;
