@@ -37,6 +37,8 @@ app.get('/time', (req, res) => {
 //   });
 // });
 
-app.listen(Port, () => {
-  console.log(`Server Running on: http://localhost:${Port}/api/users`);
-});
+// app.listen(Port, () => {
+//   console.log(`Server Running on: http://localhost:${Port}/api/users`);
+// });
+
+export default app
