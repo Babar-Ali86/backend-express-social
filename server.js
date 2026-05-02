@@ -1,4 +1,3 @@
-import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import userRoute from './routes/api/userRouter.js';
@@ -18,7 +17,7 @@ app.use('/api', userRoute, postRoute);
 
 app.get('/time', (req, res) => {
   let time = new Date();
-  res.send(`<h1>${time}</h1>`);
+  res.send(`<h1>Date & Time is :</h1><br> <h2> ${time} </h2>`);
 });
 
 // app.post('/api/user', (req, res) => {

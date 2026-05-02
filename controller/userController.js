@@ -42,10 +42,11 @@ export const addUser = async (req, res) => {
     PhoneNo,
     Password,
     UserName,
+    Created_At
   } = req.body;
   try {
     const [result] = await db.query(
-      'insert into users (FirstName, LastName,City,Country,Email,PhoneNo,Password,UserName,created_At) values (?,?,?,?,?,?,?,?,?)',
+      'insert into users (FirstName, LastName,City,Country,Email,PhoneNo,Password,UserName,Created_At) values (?,?,?,?,?,?,?,?,?)',
       [
         FirstName,
         LastName,
@@ -55,7 +56,7 @@ export const addUser = async (req, res) => {
         PhoneNo,
         Password,
         UserName,
-        created_At,
+        Created_At,
       ],
     );
     res.json({
@@ -88,7 +89,7 @@ export const updateUser = async (req, res) => {
 
   try {
     await db.query(
-      'UPDATE users SET FirstName = ?, LastName =?, City=?, Country=?, Email=?,PhoneNo=?, Password=?, UserName=?,updated_at = ? where id = ?',
+      'UPDATE users SET FirstName = ?, LastName =?, City=?, Country=?, Email=?,PhoneNo=?, Password=?, UserName=?,Updated_at = ? where id = ?',
       [
         FirstName,
         LastName,
